@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="EN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI...</title>
+    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="display-3 m-4 text-center">Tensor based AI for linear regression</div>
+        <div class="display-4 m-4 text-center">Y=2X-1</div>
+    </div>
+
+    <div class="setters">
+        <div class="setters">
+            <div class="input-group">
+                <span class="input-group-addon">Epoch</span>
+                <input id="epoch" type="number" class="form-control" name="msg" value=100>
+            </div>
+            <div class="text-center m-2">
+                <button class="btn btn-primary run text-center">Train</button>
+            </div>
+
+            <div class="">Loss:</div>
+            <div class="loss"></div>
+        </div>
+        <div class="setters getters">
+            <div class="input-group">
+                <span class="input-group-addon">X</span>
+                <input id="x" type="number" class="form-control" name="msg" value=10>
+            </div>
+            <div class="text-center m-2">
+                <button class="btn btn-primary predict text-center">Predict</button>
+            </div>
+
+            <div class="">Y:</div>
+            <div class="y"></div>
+        </div>
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.0">
+
+
+        </script>
+        <script src="jquery.js"></script>
+        <script src="ai.js"></script>
+</body>
+
+</html>

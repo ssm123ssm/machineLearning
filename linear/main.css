@@ -1,0 +1,9 @@
+.setters {
+    width: 300px;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.getters {
+    display: none;
+}
