@@ -1,5 +1,5 @@
-const x_array = [10, 1, 18, 0, 25, 1, 30, 0, 32, 1, 52, 1, 57, 0, 65, 1, 85, 0, 93, 1];
-const y_array = [0, 1, 0, 1, 2, 4, 3, 4, 3, 4];
+const x_array = [40, 0, 18, 0, 25, 1, 30, 0, 45, 1, 52, 1, 57, 0, 65, 1, 85, 0, 93, 1];
+const y_array = [1, 0, 0, 0, 2, 4, 3, 4, 3, 4];
 
 function learnToSort(ep) {
 
@@ -13,13 +13,13 @@ function learnToSort(ep) {
 
     //HIDDEN LAYER
     const hidden = tf.layers.dense({
-        units: 1000,
+        units: 500,
         activation: 'sigmoid',
         inputDim: 2
     });
 
     const hidden2 = tf.layers.dense({
-        units: 1000,
+        units: 500,
         activation: 'sigmoid'
     });
 
@@ -48,13 +48,18 @@ function learnToSort(ep) {
             epochs: ep,
             callbacks: {
                 onTrainBegin: function (result) {
-                    console.log("started training Linear");
+                    angular.element($(".ag")).scope().training = true;
+                    angular.element($(".ag")).scope().$apply();
                 },
                 onEpochEnd: function (num, log) {
                     //LOGGING THE LOSS FOR EACH EPOCH. 
                     //WE EXPECT THIS TO STEP DOWN TOWARDS 0
                     console.log(log.loss);
-                    $(".loss").html('Loss: ' + log.loss);
+                    $(".loss").html('Epoch: ' + (num + 1) + '   Loss: ' + log.loss);
+                },
+                onTrainEnd: function () {
+                    angular.element($(".ag")).scope().training = false;
+                    angular.element($(".ag")).scope().$apply();
                 }
             }
         }
@@ -64,6 +69,13 @@ function learnToSort(ep) {
     //TRAINIG THE MODEL
     train().then(function (ress) {
         trained = true;
+        var scope = angular.element($(".ag")).scope();
+        scope.trained = trained;
+        $("html, body").animate({
+            scrollTop: $(document).height()
+        }, 1000);
+
+        scope.$apply();
         //$(".getters").css('display', 'block');
         //alert('Traing complete. User test(int) on console to test the model');
         console.log('Expected outcome is..');
@@ -99,11 +111,30 @@ myApp.controller('myController', ['$scope', function ($scope) {
     $scope.xs = x_array.filter(function (val, index) {
         return index % 2 == 0;
     });
+    $scope.trained = trained;
     $scope.ps = x_array.filter(function (val, index) {
         return index % 2 == 1;
     });
     $scope.ys = y_array;
     $scope.train = function () {
-        learnToSort(200);
+        learnToSort($("#epoch").val() || 100);
+    }
+    $scope.predict = function () {
+        getCat(model.predict(tf.tensor2d([$("#marks").val(), $("input[name='optionsRadios']:checked").val()], [1, 2])));
     }
     }]);
+
+function getCat(tens) {
+    tens.print();
+    var a = tens.flatten().dataSync();
+    var max = 0;
+    var index = 0;
+
+    for (var i = 0; i < a.length; i++) {
+        if (a[i] > max) {
+            max = a[i];
+            index = i + 1;
+        }
+    }
+    $(".cat").html('Category: ' + index);
+}

@@ -11,7 +11,7 @@
 
 <body ng-app='myApp' ng-controller='myController'>
 
-    <div class="container">
+    <div class="container ag">
         <div class="display-3 text-center m-5">Classifier</div>
 
         <div class="des">
@@ -19,7 +19,7 @@
             <p>The exam consists of a theory paper and a practical component.</p>
             <p>
                 Theory paper is given marks out of 100. Practical is either pass or fail.</p>
-            <p>This is how they are categorized.</p>
+            <p>This is how they should be categorized.</p>
 
             <table class="table">
                 <tr>
@@ -30,12 +30,12 @@
                 <tr>
                     <td>pass or fail</td>
                     <td> less than 35</td>
-                    <td>0</td>
+                    <td>1</td>
                 </tr>
                 <tr>
                     <td>fail</td>
                     <td>35 - 50</td>
-                    <td>1</td>
+                    <td>2</td>
                 </tr>
                 <tr>
                     <td>pass</td>
@@ -67,15 +67,44 @@
                 <td>{{$index}}</td>
                 <td>{{x}}</td>
                 <td>{{ps[$index]}}</td>
-                <td>{{ys[$index]}}</td>
+                <td>{{ys[$index]+1}}</td>
             </tr>
 
         </table>
 
-        <div class="text-center">
+        <div class="text-center" ng-if="!training">
+            <div class="form-group">
+                <label for="epoch">Epoch:</label>
+                <input type="number" class="form-control" id="epoch" placeholder="Enter the epoch" value=400>
+            </div>
             <button class="btn" id="train " ng-click="train()">Start trainig!</button>
         </div>
-        <div class="loss"></div>
+        <div class="loss">Sart training to see the loss...</div>
+
+        <form role="form" ng-show="trained">
+            <div class="form-group">
+                <label for="Marks">Marks for theory paper</label>
+                <input type="number" class="form-control" id="marks" placeholder="Enter marks">
+            </div>
+
+
+            <div class="radio">
+                <label>
+    <input type="radio" name="optionsRadios" id="pass" value=1 checked>
+    Pass
+  </label>
+            </div>
+            <div class="radio">
+                <label>
+    <input type="radio" name="optionsRadios" id="fail" value=0>Fail
+  </label>
+            </div>
+            <div class="text-center">
+                <button type="button" class="btn btn-default" id="predict" ng-click="predict()">Predict category</button>
+                <div class="cat m-3 h3 text-center">Model is trained. It can predict now.</div>
+            </div>
+
+        </form>
 
 
     </div>
