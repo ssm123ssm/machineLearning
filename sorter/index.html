@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="EN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI...</title>
+    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body ng-app='myApp' ng-controller='myController'>
+
+    <div class="container">
+        <div class="display-3 text-center m-5">Classifier</div>
+
+        <div class="des">
+            This model classifies students who sat to an exam according to their marks.
+            <p>The exam consists of a theory paper and a practical component.</p>
+            <p>
+                Theory paper is given marks out of 100. Practical is either pass or fail.</p>
+            <p>This is how they are categorized.</p>
+
+            <table class="table">
+                <tr>
+                    <th>Practical</th>
+                    <th>Theory</th>
+                    <th>Category</th>
+                </tr>
+                <tr>
+                    <td>pass or fail</td>
+                    <td> less than 35</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>fail</td>
+                    <td>35 - 50</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>pass</td>
+                    <td>35 - 50</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>fail</td>
+                    <td>above 50</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td>pass</td>
+                    <td>above 50</td>
+                    <td>5</td>
+                </tr>
+            </table>
+
+            <p> Below is the trainig data set consisting of marks of 10 students.</p>
+        </div>
+        <table class="table">
+            <tr>
+                <th>#</th>
+                <th>Theory</th>
+                <th>Practical</th>
+                <th>Category</th>
+            </tr>
+            <tr ng-repeat='x in xs track by $index'>
+                <td>{{$index}}</td>
+                <td>{{x}}</td>
+                <td>{{ps[$index]}}</td>
+                <td>{{ys[$index]}}</td>
+            </tr>
+
+        </table>
+
+        <div class="text-center">
+            <button class="btn" id="train " ng-click="train()">Start trainig!</button>
+        </div>
+        <div class="loss"></div>
+
+
+    </div>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.0">
+
+
+    </script>
+    <script src="jquery.js"></script>
+    <script src="angular.js"></script>
+    <script src="ai.js"></script>
+</body>
+
+</html>
