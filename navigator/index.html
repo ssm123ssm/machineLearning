@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="EN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI...</title>
+    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body ng-app='myApp' ng-controller='myController'>
+
+    <div class="container ang" id="ang">
+        <div class="display-3 text-center m-5">Navigator</div>
+
+        <div class="grid-frame" ng-repeat="row in rows track by $index">
+
+            <div class="cell {{cell == 1 ? 'brick' : cell == 2 ? 'you' : 'free'}}" ng-repeat='cell in row  track by $index' ng-click='mark($parent.$index, $index)'></div>
+
+        </div>
+
+
+    </div>
+
+    <div>
+        <div>Epochs:</div>
+        <input type="number" value=100 id='epoch'>
+        <button ng-click='setEpoch()'>Set epoch and navigate</button>
+        <button onclick='_start()'>Navigate</button>
+
+        <button ng-click='brick()'>Place a brick</button>
+        <button ng-click='remove()'>Remove a brick</button>
+        <button ng-click='place()'>Place a the navigator</button>
+
+
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.0">
+
+
+    </script>
+    <script src="jquery.js"></script>
+    <script src="angular.js"></script>
+    <script src="ai2.js"></script>
+</body>
+
+</html>
