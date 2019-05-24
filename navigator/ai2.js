@@ -245,6 +245,8 @@ function createRandomX(loops) {
             }
         }
     }
+    grid.obstacles = [];
+    initGrid();
     console.log('Ready...');
 }
 
