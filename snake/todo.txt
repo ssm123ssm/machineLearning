@@ -1,0 +1,1 @@
+increase the number of initial obstacles for a better training set.

@@ -16,7 +16,7 @@
 
         <div class="grid-frame" ng-repeat="row in rows track by $index">
 
-            <div class="cell {{cell == 1 ? 'brick' : cell == 2 ? 'you' : 'free'}}" ng-repeat='cell in row  track by $index' ng-click='mark($parent.$index, $index)'></div>
+            <div class="cell {{cell == 1 ? 'brick' : cell == 2 ? 'you' : cell == 3 ? 'apple' : 'free'}}" ng-repeat='cell in row  track by $index' ng-click='mark($parent.$index, $index)'></div>
 
         </div>
 
