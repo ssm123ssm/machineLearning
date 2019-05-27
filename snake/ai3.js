@@ -180,7 +180,7 @@ var appleFinder;
 var trained = false;
 var runs = 0;
 var pos = [8, 5];
-var rate = 50;
+var rate = 100;
 var navigating = false;
 var lastDir = 1;
 var apple = [5, 5];
