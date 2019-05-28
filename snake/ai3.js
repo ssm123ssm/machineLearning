@@ -151,11 +151,11 @@ function LearnToFindTheApple(ep) {
 
 //Data generation for apple finder
 function trainToFindApple(ep) {
-    for (var i = 0; i < 1000; i++) {
-        var pos_a = Math.floor(Math.random() * 15);
-        var pos_b = Math.floor(Math.random() * 15);
-        var apple_a = Math.floor(Math.random() * 15);
-        var apple_b = Math.floor(Math.random() * 15);
+    for (var i = 0; i < 600; i++) {
+        var pos_a = Math.floor(Math.random() * grid.x_length);
+        var pos_b = Math.floor(Math.random() * grid.y_length);
+        var apple_a = Math.floor(Math.random() * grid.x_length);
+        var apple_b = Math.floor(Math.random() * grid.x_length);
         apple_x.push([pos_a, pos_b, apple_a, apple_b]);
         apple_y.push(dirToApple(pos_a, pos_b, apple_a, apple_b));
     }
@@ -287,8 +287,8 @@ function propagate(next) {
 }
 
 var grid = {
-    x_length: 25,
-    y_length: 25,
+    x_length: 15,
+    y_length: 15,
     obstacles: [[3, 3], [2, 2], [0, 1], [3, 1], [1, 3], [2, 3], [6, 1], [6, 2], [6, 3], [6, 4], [6, 5], [6, 6], [5, 6], [4, 6], [3, 6], [2, 6], [1, 6], [0, 5], [5, 0], [6, 7], [7, 1], [2, 1], [1, 1, [0, 7]]],
     pos: pos,
     apple: apple,
