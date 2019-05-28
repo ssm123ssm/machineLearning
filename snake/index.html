@@ -11,14 +11,17 @@
 
 <body ng-app='myApp' ng-controller='myController'>
 
-    <div class="container ang" id="ang">
-        <div class="display-3 text-center m-5">Navigator</div>
+    <div class="container-fluid ang" id="ang">
+        <div class="display-3 text-center m-5">Snake</div>
 
-        <div class="grid-frame" ng-repeat="row in rows track by $index">
+        <div class="grid-wrap text-center m-0">
+            <div class="grid-frame" ng-repeat="row in rows track by $index">
+                <div class="cell {{cell == 1 ? 'brick' : cell == 2 ? 'you' : cell == 3 ? 'apple' : 'free'}}" ng-repeat='cell in row  track by $index' ng-click='mark($parent.$index, $index)'></div>
 
-            <div class="cell {{cell == 1 ? 'brick' : cell == 2 ? 'you' : cell == 3 ? 'apple' : 'free'}}" ng-repeat='cell in row  track by $index' ng-click='mark($parent.$index, $index)'></div>
-
+            </div>
         </div>
+
+
 
 
     </div>
@@ -27,11 +30,13 @@
         <div>Epochs:</div>
         <input type="number" value=100 id='epoch'>
         <button ng-click='setEpoch()'>Train</button>
-        <button onclick='_start()'>Navigate</button>
+        <button onclick='_start()'>Start</button>
+        <button onclick='reset()'>Reset</button>
+        <button onclick='stop()'>Stop</button>
 
-        <button ng-click='brick()'>Place a brick</button>
-        <button ng-click='remove()'>Remove a brick</button>
-        <button ng-click='place()'>Place the navigator</button>
+        <!--<button ng-click='brick()'>Place a brick</button>
+<button ng-click='remove()'>Remove a brick</button>
+<button ng-click='place()'>Place the navigator</button>-->
 
 
     </div>

@@ -1,7 +1,7 @@
 .cell {
-    width: 40px;
-    height: 40px;
-    background-color: aqua;
+    width: 20px;
+    height: 20px;
+    background-color: #86bde296;
     display: inline-block;
 }
 
@@ -19,5 +19,5 @@
 }
 
 .apple {
-    background-color: #2f37ff;
+    background-color: #E91E63;
 }

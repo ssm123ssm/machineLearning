@@ -151,14 +151,20 @@ function LearnToFindTheApple(ep) {
 
 //Data generation for apple finder
 function trainToFindApple(ep) {
-    for (var i = 0; i < 600; i++) {
-        var pos_a = Math.floor(Math.random() * grid.x_length);
-        var pos_b = Math.floor(Math.random() * grid.y_length);
-        var apple_a = Math.floor(Math.random() * grid.x_length);
-        var apple_b = Math.floor(Math.random() * grid.x_length);
+    for (var i = 0; i < 1000; i++) {
+        var pos_a = Math.floor(Math.random() * 15);
+        var pos_b = Math.floor(Math.random() * 15);
+        var apple_a = Math.floor(Math.random() * 15);
+        var apple_b = Math.floor(Math.random() * 15);
         apple_x.push([pos_a, pos_b, apple_a, apple_b]);
         apple_y.push(dirToApple(pos_a, pos_b, apple_a, apple_b));
     }
+}
+
+//adding parts
+function addPart(old) {
+    console.log('Adding part...');
+    grid.parts.push(old);
 }
 
 function findTheApple(a, b, c, d) {
@@ -184,6 +190,7 @@ var rate = 100;
 var navigating = false;
 var lastDir = 1;
 var apple = [5, 5];
+var timeout;
 
 
 function _start() {
@@ -221,12 +228,18 @@ function start() {
         initGrid();
 
         if (rows[grid.pos[1] + next[1]] && rows[grid.pos[0] + next[0]] && ((rows[grid.pos[0] + next[0]][grid.pos[1] + next[1]] == 3))) {
-            grid.pos = [(grid.pos[0] + next[0]), (grid.pos[1] + next[1])];
+            var tail = grid.parts[grid.parts.length - 1];
+            if (!tail) {
+                tail = grid.pos;
+            }
+            //debugger;
+            propagate(next);
+            addPart(tail);
             randomizeApple();
             initGrid();
             runs++;
-            if (runs < 500) {
-                setTimeout(function () {
+            if (1) {
+                timeout = setTimeout(function () {
                     start();
                 }, rate);
             } else {
@@ -235,11 +248,11 @@ function start() {
             }
         } else {
             if (rows[grid.pos[1] + next[1]] && rows[grid.pos[0] + next[0]] && ((rows[grid.pos[0] + next[0]][grid.pos[1] + next[1]] == 0))) {
-                grid.pos = [(grid.pos[0] + next[0]), (grid.pos[1] + next[1])];
+                propagate(next);
                 initGrid();
                 runs++;
-                if (runs < 500) {
-                    setTimeout(function () {
+                if (1) {
+                    timeout = setTimeout(function () {
                         start();
                     }, rate);
                 } else {
@@ -259,12 +272,27 @@ function start() {
     }
 }
 
+function stop() {
+    clearTimeout(timeout);
+    navigating = false;
+}
+
+function propagate(next) {
+    var oldPos = grid.pos;
+    grid.pos = [(grid.pos[0] + next[0]), (grid.pos[1] + next[1])];
+    if (grid.parts.length > 0) {
+        grid.parts.pop();
+        grid.parts.unshift(oldPos);
+    }
+}
+
 var grid = {
-    x_length: 9,
-    y_length: 9,
+    x_length: 25,
+    y_length: 25,
     obstacles: [[3, 3], [2, 2], [0, 1], [3, 1], [1, 3], [2, 3], [6, 1], [6, 2], [6, 3], [6, 4], [6, 5], [6, 6], [5, 6], [4, 6], [3, 6], [2, 6], [1, 6], [0, 5], [5, 0], [6, 7], [7, 1], [2, 1], [1, 1, [0, 7]]],
     pos: pos,
-    apple: apple
+    apple: apple,
+    parts: []
 }
 var rows = [];
 
@@ -390,6 +418,13 @@ function initGrid() {
     } else {
         console.log('Can\'t place the apple there...');
     }
+    grid.parts.forEach(function (part) {
+        if (part) {
+            if (rows[part[0]][part[1]] == 0) {
+                rows[part[0]][part[1]] = 2
+            }
+        }
+    });
     var scope = angular.element($(".ang")).scope();
     scope.rows = rows;
     scope.$evalAsync();
@@ -403,7 +438,7 @@ function scan(pos) {
     if (col == 0) {
         ar[0] = 1;
     } else {
-        if (rows[row][col - 1] == 1) {
+        if (rows[row][col - 1] == 1 || rows[row][col - 1] == 2) {
             ar[0] = 1;
 
         } else {
@@ -414,7 +449,7 @@ function scan(pos) {
     if (row == 0) {
         ar[1] = 1;
     } else {
-        if (rows[row - 1][col] == 1) {
+        if (rows[row - 1][col] == 1 || rows[row - 1][col] == 2) {
             ar[1] = 1;
         } else {
             ar[1] = 0;
@@ -424,7 +459,7 @@ function scan(pos) {
     if (col == (grid.x_length - 1)) {
         ar[2] = 1;
     } else {
-        if (rows[row][col + 1] == 1) {
+        if (rows[row][col + 1] == 1 || rows[row][col + 1] == 2) {
             ar[2] = 1;
         } else {
             ar[2] = 0;
@@ -434,7 +469,7 @@ function scan(pos) {
     if (row == grid.y_length - 1) {
         ar[3] = 1;
     } else {
-        if (rows[row + 1][col] == 1) {
+        if (rows[row + 1][col] == 1 || rows[row + 1][col] == 2) {
             ar[3] = 1;
         } else {
             ar[3] = 0;
@@ -476,6 +511,11 @@ function createRandomX(loops) {
     grid.obstacles = [];
     initGrid();
     console.log('Ready...');
+}
+
+function reset() {
+    grid.parts = [];
+    initGrid();
 }
 
 function getNext(ar) {
