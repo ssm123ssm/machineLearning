@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="EN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI...</title>
+    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body ng-app="app" ng-controller='ctrl'>
+
+    <div class="container m-4 ag text-center" ng-init=start()>
+        RL
+
+        <div ng-repeat='val in state track by $index' class="sqr {{val == 1 ? currentColor : 'slot'}}">
+
+        </div>
+    </div>
+    <div>Score : {{score}}</div>
+    <div>Highscore : {{highscore}}</div>
+    <button class="btn" onclick="stop()">Stop</button>
+    <button class="btn" ng-click="start()">Start</button>
+
+
+
+
+
+    <!--<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.0">
+</script>-->
+    <script src="jquery.js"></script>
+    <script src="angular.js"></script>
+    <script src="abbr.js"></script>
+    <!--<script src="nn.js"></script>-->
+    <script src="ai.js"></script>
+</body>
+
+</html>

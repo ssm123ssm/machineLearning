@@ -1,0 +1,51 @@
+.sqr {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    top: 9px;
+    /*    box-shadow: -4px 4px 14px 0px;*/
+}
+
+.black {
+    background-color: black;
+    position: relative;
+    /*    transition: background-color 0.2s;*/
+    top: 9px;
+}
+
+.green {
+    background-color: green;
+    position: relative;
+    top: 9px;
+    /*    transition: background-color 0.2s;*/
+}
+
+.yellow {
+    background-color: yellow;
+    position: relative;
+    /*    transition: background-color 0.2s;*/
+    top: 9px;
+}
+
+.blue {
+    background-color: blue;
+    position: relative;
+    top: 9px;
+    /*    transition: background-color 0.2s;*/
+}
+
+.brown {
+    background-color: brown;
+    position: relative;
+    top: 9px;
+    /*    transition: background-color 0.2s;*/
+}
+
+.slot {
+    width: 80px;
+    height: 80px;
+    background-color: #1a161d36;
+    display: inline-block;
+}
