@@ -201,7 +201,7 @@ function _start() {
 }
 
 function start() {
-    if (trained) {
+    if (1) {
         navigating = true;
         var input = scan(grid.pos);
 
@@ -600,6 +600,8 @@ function getDirection(x) {
 $(function () {
     initGrid();
     createRandomX(300);
+    //LearnToFindTheApple(1)
+    learnToNavigate(1);
 });
 
 //start();
