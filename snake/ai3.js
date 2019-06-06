@@ -601,7 +601,7 @@ $(function () {
     initGrid();
     createRandomX(300);
     //LearnToFindTheApple(1)
-    learnToNavigate(1);
+    //learnToNavigate(1);
 });
 
 //start();

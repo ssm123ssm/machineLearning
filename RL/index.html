@@ -12,16 +12,40 @@
 <body ng-app="app" ng-controller='ctrl'>
 
     <div class="container m-4 ag text-center" ng-init=start()>
-        RL
+        <div>Rewards</div>
 
         <div ng-repeat='val in state track by $index' class="sqr {{val == 1 ? currentColor : 'slot'}}">
-
+            <input ng-model=rewards[$index] ng-value=rewards[$index] class="rewards" type="number">
         </div>
+
     </div>
-    <div>Score : {{score}}</div>
-    <div>Highscore : {{highscore}}</div>
-    <button class="btn" onclick="stop()">Stop</button>
-    <button class="btn" ng-click="start()">Start</button>
+    <div class="score">Episode : {{episode}} <br>Score : {{score}} <br> Highscore : {{highscore}} </div>
+    <div class="frame">
+        <div class="option">Exploitation : <input class="opi" ng-model=epsilon ng-value=epsilon></div>
+        <div class="option>">Episodes : <input class="opi" ng-model=episodes ng-value=episodes></div>
+        <div class="option">Discount factor : <input class="opi" ng-model=gamma ng-value=gamma></div>
+        <div class="option">Speed : <input class="opi" ng-model=rate ng-value=rate></div>
+
+    </div>
+    <div class="text-center">
+        <button class="btn" onclick="stop()">Stop</button>
+        <button class="btn" ng-click="start()">Start</button>
+    </div>
+
+    <div class="q">
+        <table class="table tt table-striped">
+            <tr>
+                <th>state</th>
+                <th>left</th>
+                <th>right</th>
+            </tr>
+            <tr ng-repeat='row in q_table track by $index'>
+                <td class='td'>{{$index}}</td>
+                <td class='td'>{{row[0] | number : 2}}</td>
+                <td class='td'>{{row[1] | number : 2}}</td>
+            </tr>
+        </table>
+    </div>
 
 
 

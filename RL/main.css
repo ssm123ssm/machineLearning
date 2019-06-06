@@ -8,6 +8,36 @@
     /*    box-shadow: -4px 4px 14px 0px;*/
 }
 
+.rewards {
+    font-size: 12px;
+    text-align: center;
+    margin: auto;
+    width: 50px;
+}
+
+.score {
+    text-align: center;
+    margin: 20px;
+}
+
+.frame {
+    width: 200px;
+    position: relative;
+    border: 1px solid black;
+    padding: 18px;
+    font-size: 14px;
+    margin: 20px;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.opi {
+    width: 47px;
+    text-align: center;
+    position: absolute;
+    right: 18px;
+}
+
 .black {
     background-color: black;
     position: relative;
