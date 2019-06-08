@@ -140,6 +140,7 @@ app.controller('ctrl', ['$scope', function ($scope) {
                         if (currentEpiseode < $scope.episodes) {
                             $scope.currentColor = $scope.colors[randUpTo($scope.colors.length)];
                             runGame(currentEpiseode);
+                            $scope.score = 0;
                         } else {
                             v('Updated q_table:', q_table);
                             v('High score: ' + highScore);
