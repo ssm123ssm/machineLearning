@@ -1,4 +1,4 @@
-var epsilon = 90;
+var epsilon = 95;
 var gamma = 0.95;
 var episodes = 100;
 var states = 5;
@@ -21,16 +21,6 @@ function initQtable() {
 
 var q_table = initQtable();
 
-function test(state) {
-    model.predict(tf.tensor2d([state], [1, 1])).print();
-}
-
-/*
-reaching points '1' and '4' carried score...
-point '1' from point '0' = 500 score
-point '4' from '3' = 200 score
-*/
-//setting the rewards.defaults to these
 var rewards = [2, 0, 0, 0, 5];
 
 function step(state, action) {
@@ -68,6 +58,7 @@ app.controller('ctrl', ['$scope', function ($scope) {
     $scope.setState = function (state) {
         $scope.state = [0, 0, 0, 0, 0];
         $scope.state[state] = 1;
+        $scope.$apply();
     }
     $scope.score = 0;
     $scope.highscore = 0;
@@ -156,11 +147,12 @@ app.controller('ctrl', ['$scope', function ($scope) {
                         }
                     } else {
                         state = next.next;
-                        score += next.reward;
-                        $scope.score = score;
+
                         $scope.setState(state);
                         $scope.$apply();
                         timeOut = setTimeout(function () {
+                            score += next.reward;
+                            $scope.score += next.reward;
                             proceed();
                         }, $scope.rate);
                     }
